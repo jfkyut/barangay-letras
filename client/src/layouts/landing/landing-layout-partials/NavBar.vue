@@ -7,7 +7,7 @@ const open = ref(false)
 
 <template>
   <nav class="bg-white shadow dark:bg-gray-800 dark:shadow-sm border-b dark:border-gray-700">
-    <div class="max-w-[90%] mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="lg:max-w-[90%] mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between h-16">
         <div class="flex items-center">
           <a class="text-xl font-semibold text-indigo-600 dark:text-indigo-400" href="#">LETRAS B</a>
@@ -15,7 +15,10 @@ const open = ref(false)
         <div class="hidden sm:flex sm:items-center sm:space-x-6">
           <router-link to="/" class="text-gray-600 hover:text-gray-800 dark:text-gray-300 dark:hover:text-white">Home</router-link>
           <router-link to="#about" class="text-gray-600 hover:text-gray-800 dark:text-gray-300 dark:hover:text-white">About</router-link>
-          <router-link to="#forms" class="text-gray-600 hover:text-gray-800 dark:text-gray-300 dark:hover:text-white">Forms</router-link>
+          <button class="text-gray-600 hover:text-gray-800 dark:text-gray-300 dark:hover:text-white">
+            Forms
+            <i class="ri-arrow-down-s-line"></i>
+          </button>
           <router-link to="#legislatives" class="text-gray-600 hover:text-gray-800 dark:text-gray-300 dark:hover:text-white">Legislatives</router-link>
           <router-link to="#forms" class="text-gray-600 hover:text-gray-800 dark:text-gray-300 dark:hover:text-white">Legislations</router-link>
           <router-link to="#comms" class="text-gray-600 hover:text-gray-800 dark:text-gray-300 dark:hover:text-white">Communications</router-link>
