@@ -55,18 +55,6 @@ const guestRoutes = [
     },
     beforeEnter: [guest]
   },
-
-  // landing page route
-
-  {
-    path: '/',
-    name: 'landing',
-    component: () => import('@/views/landing/Landing.vue'),
-    meta: {
-      layout: LandingLayout,
-      title: 'Password Reset'
-    },
-  }
 ];
 
 export default guestRoutes;

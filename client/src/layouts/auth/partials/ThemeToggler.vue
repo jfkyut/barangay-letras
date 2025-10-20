@@ -16,7 +16,7 @@ const toggleTheme = (e) => {
   <div class="flex items-center justify-between p-2 rounded-lg text-white hover:bg-gray-700 group">
     <div>
       <span class="w-5 h-5 transition duration-75 text-gray-400 group-hover:text-white">
-          <i class="fa fa-moon"></i>
+          <i class="ri-moon-fill"></i>
         </span>
       <span class="ms-3">Dark mode</span>
     </div>

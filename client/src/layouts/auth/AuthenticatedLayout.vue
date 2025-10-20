@@ -81,11 +81,11 @@ watch(currentRouteTitle, (currentRouteTitle) => {
       <div class="h-full px-3 py-4 overflow-y-auto">
         <ul class="space-y-2 font-medium">
           <li>
-            <RouterLink to="/home" @click="closeOnSmallScreen" active-class="bg-gray-700" class="flex items-center p-2 rounded-lg text-white hover:bg-gray-700 group">
+            <RouterLink to="/dashboard" @click="closeOnSmallScreen" active-class="bg-gray-700" class="flex items-center p-2 rounded-lg text-white hover:bg-gray-700 group">
               <span class="w-5 h-5 transition duration-75 text-gray-400 group-hover:text-white">
-                <i class="fa fa-home"></i>
+                <i class="ri-home-fill"></i>
               </span>
-              <span class="ms-3">Home</span>
+              <span class="ms-2">Dashboard</span>
             </RouterLink>
           </li>
           <li>

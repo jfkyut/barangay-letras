@@ -10,7 +10,7 @@ const authenticatedRoutes = [
     component: () => import('@/views/home/HomeView.vue'),
     meta: {
       layout: AuthenticatedLayout,
-      title: 'Home'
+      title: 'Dashboard'
     },
     beforeEnter: [authenticated, verified]
   },

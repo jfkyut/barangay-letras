@@ -1,6 +1,11 @@
 <script setup>
 import { ref } from 'vue'
 import { RouterLink } from 'vue-router';
+import FormDropdown from './nav-bar-partials/FormDropdown.vue';
+import LegislationDropdown from './nav-bar-partials/LegislationDropdown.vue';
+import LegislativeDropdown from './nav-bar-partials/LegislativeDropdown.vue';
+import CommunicationDropdown from './nav-bar-partials/CommunicationDropdown.vue';
+import KatarunganDropdown from './nav-bar-partials/KatarunganDropdown.vue';
 const open = ref(false)
 
 </script>
@@ -12,22 +17,35 @@ const open = ref(false)
         <div class="flex items-center">
           <a class="text-xl font-semibold text-indigo-600 dark:text-indigo-400" href="#">LETRAS B</a>
         </div>
+
+        <!-- nav and dropdown -->
         <div class="hidden sm:flex sm:items-center sm:space-x-6">
           <router-link to="/" class="text-gray-600 hover:text-gray-800 dark:text-gray-300 dark:hover:text-white">Home</router-link>
           <router-link to="#about" class="text-gray-600 hover:text-gray-800 dark:text-gray-300 dark:hover:text-white">About</router-link>
-          <button class="text-gray-600 hover:text-gray-800 dark:text-gray-300 dark:hover:text-white">
-            Forms
+          <FormDropdown />
+          
+          <LegislationDropdown />
+          
+          <LegislativeDropdown />
+          
+          <CommunicationDropdown />
+          
+          <KatarunganDropdown />
+
+          <button class="text-gray-600 hover:text-gray-800 dark:text-gray-300 dark:hover:text-white relative">
+            VAWC
+          </button>
+
+          <button class="text-gray-600 hover:text-gray-800 dark:text-gray-300 dark:hover:text-white relative">
+            Local Special Bodies
             <i class="ri-arrow-down-s-line"></i>
           </button>
-          <router-link to="#legislatives" class="text-gray-600 hover:text-gray-800 dark:text-gray-300 dark:hover:text-white">Legislatives</router-link>
-          <router-link to="#forms" class="text-gray-600 hover:text-gray-800 dark:text-gray-300 dark:hover:text-white">Legislations</router-link>
-          <router-link to="#comms" class="text-gray-600 hover:text-gray-800 dark:text-gray-300 dark:hover:text-white">Communications</router-link>
-          <router-link to="#katarungan" class="text-gray-600 hover:text-gray-800 dark:text-gray-300 dark:hover:text-white">Katarungang Pambarangay</router-link>
 
           <RouterLink to="login" class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-600">
             Login
           </RouterLink>
         </div>
+        <!-- nav and dropdown end -->
 
         <!-- Mobile menu button -->
         <div class="flex items-center sm:hidden">
