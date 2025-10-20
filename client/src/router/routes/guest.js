@@ -1,5 +1,6 @@
 import GuestLayoutVue from '@/layouts/guest/GuestLayout.vue';
 import guards from '../guards/guards';
+import LandingLayout from '@/layouts/landing/LandingLayout.vue';
 
 const { guest, authenticated, notVerified } = guards();
 
@@ -54,6 +55,18 @@ const guestRoutes = [
     },
     beforeEnter: [guest]
   },
+
+  // landing page route
+
+  {
+    path: '/',
+    name: 'landing',
+    component: () => import('@/views/landing/Landing.vue'),
+    meta: {
+      layout: LandingLayout,
+      title: 'Password Reset'
+    },
+  }
 ];
 
 export default guestRoutes;

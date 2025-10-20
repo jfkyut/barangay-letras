@@ -4,7 +4,7 @@ const { authenticated, verified } = guards();
 
 const authenticatedRoutes = [
   {
-    path: '/',
+    path: '/home',
     alias: ['/home', '/dashboard'],
     name: 'home',
     component: () => import('@/views/home/HomeView.vue'),
