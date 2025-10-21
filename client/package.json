@@ -9,8 +9,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@primeuix/themes": "^1.2.3",
     "axios": "^1.6.7",
     "pinia": "^2.1.7",
+    "primevue": "^4.3.7",
     "remixicon": "^4.7.0",
     "vue": "^3.4.15",
     "vue-router": "^4.2.5",

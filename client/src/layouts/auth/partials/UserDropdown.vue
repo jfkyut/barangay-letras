@@ -9,6 +9,7 @@ import { useRouter } from 'vue-router';
 import { useHttpAuth } from '@/http/auth';
 import { useProfileStore } from '@/stores/profile';
 import { storeToRefs } from 'pinia';
+import { Button } from 'primevue';
 
 const { user } = storeToRefs(useProfileStore());
 const { logoutRequest } = useHttpAuth();
@@ -51,9 +52,9 @@ const handleClickOutside = (e) => {
 
 <template>
   <div class="relative">
-    <ExtraButton @click.stop="showDropdown" class="border dark:border-gray-700">
+    <Button severity="secondary" @click.stop="showDropdown">
       {{ user?.name }}
-    </ExtraButton>
+    </Button>
 
     <DropdownMenu :show="isDropdownShow" ref="dropdownRef">
       <DropdownLink to="/account">

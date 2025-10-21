@@ -6,7 +6,11 @@ export const useThemeStore = defineStore('theme', () => {
 
   watch(theme, (theme) => {
     localStorage.setItem('theme', theme);
-  })
+
+    document.documentElement.classList.toggle('dark', theme === 'dark');
+  }, {
+    immediate: true,
+  });
 
   const setToLight = () => {
     theme.value = 'light';
