@@ -24,13 +24,13 @@ const isShowDropdown = ref(false);
       @mouseout="isShowDropdown = false"
       position="top-12"
     >
-      <dropdown-button>
+      <dropdown-button @click="$router.push('resolutions')">
         Resolutions
       </dropdown-button>
-      <dropdown-button>
+      <dropdown-button @click="$router.push('ordinances')">
         Ordinances
       </dropdown-button>
-      <dropdown-button>
+      <dropdown-button @click="$router.push('appropriation-ordinances')">
         Appropriations
       </dropdown-button>
     </dropdown-menu>

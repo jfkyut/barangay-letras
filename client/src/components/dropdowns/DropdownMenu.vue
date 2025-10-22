@@ -17,8 +17,8 @@ defineProps({
   <div 
     id="dropdownBottom"
     :class="[show ? 'opacity-100' : 'opacity-0 invisible', position]" 
-    class="z-10 absolute bg-white divide-y divide-gray-100 duration-300 rounded-lg shadow-lg w-44 dark:bg-gray-700 border dark:border-gray-600">
-    <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownBottomButton">
+    class="z-10 absolute bg-white divide-y divide-zinc-100 duration-300 rounded-lg shadow-lg w-44 dark:bg-zinc-700 border dark:border-zinc-600">
+    <ul class="py-2 text-sm text-zinc-700 dark:text-zinc-200" aria-labelledby="dropdownBottomButton">
       <slot />
     </ul>
   </div>

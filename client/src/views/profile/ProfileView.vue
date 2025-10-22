@@ -15,10 +15,10 @@ import { DataTable } from 'primevue';
     <div class="space-y-6 mt-5">
 
       <section>
-        <header class="mb-6 pb-2 border-b dark:border-b-gray-700">
-          <h2 class="text-2xl font-medium dark:text-white">General</h2>
+        <header class="mb-6 pb-2 border-b dark:border-b-zinc-700">
+          <h2 class="text-2xl font-medium dark:text-white">Account Settings</h2>
         </header>
-        <div class="bg-white dark:bg-gray-800 shadow border dark:border-gray-700 max-w-4xl p-4 rounded-md space-y-4 relative">
+        <div class="bg-white dark:bg-zinc-800 shadow border dark:border-zinc-700 max-w-4xl p-4 rounded-md space-y-4 relative">
           <div class="space-y-2">
             <h3 class="text-lg font-medium">Profile Information</h3>
             <p class="text-sm">Notice: Updating your email would require you to reverify your new chosen email.</p>
@@ -42,11 +42,8 @@ import { DataTable } from 'primevue';
       </section>
   
       <section>
-        <header class="mb-6 pb-2 border-b dark:border-b-gray-700">
-          <h2 class="text-2xl font-medium dark:text-white">Advance Settings</h2>
-        </header>
 
-        <div class="bg-white dark:bg-gray-800 shadow border dark:border-gray-700 max-w-4xl p-4 space-y-4 rounded-t-md">
+        <div class="bg-white dark:bg-zinc-800 shadow border dark:border-zinc-700 max-w-4xl p-4 space-y-4 rounded-t-md">
           <div class="space-y-2">
             <h3 class="text-lg font-medium">Password settings</h3>
             <p>For security reasons, it's a good practice to update your password regularly. Click here to change your password now.</p>
@@ -55,7 +52,7 @@ import { DataTable } from 'primevue';
             <EditPassword />
           </div>
         </div>
-        <div class="bg-white dark:bg-gray-800 shadow border dark:border-gray-700 max-w-4xl p-4 space-y-4 rounded-b-md">
+        <div class="bg-white dark:bg-zinc-800 shadow border dark:border-zinc-700 max-w-4xl p-4 space-y-4 rounded-b-md">
           <div class="space-y-2">
             <h3 class="text-lg font-medium">Account deletion</h3>
             <p>If you wish to delete your account, please be aware that this action is irreversible and will permanently delete all your data. Click here if you are sure you want to proceed with account deletion.</p>

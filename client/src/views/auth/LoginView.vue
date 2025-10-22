@@ -66,12 +66,12 @@ onMounted(() => {
           <input 
             id="remember" 
             type="checkbox" 
-            class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800"
+            class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-emerald-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-emerald-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800"
             @change="onRememberCheckboxChange" />
         </div>
         <label for="remember" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Remember me</label>
       </div>
-      <RouterLink to="/forgot-password" class="ms-auto text-sm text-blue-700 hover:underline dark:text-blue-500">Lost Password?</RouterLink>
+      <RouterLink to="/forgot-password" class="ms-auto text-sm text-emerald-700 hover:underline dark:text-emerald-500">Lost Password?</RouterLink>
     </div>
     <PrimaryButton 
       v-if="!isLoading"
@@ -81,7 +81,7 @@ onMounted(() => {
     </PrimaryButton>
     <LoadingButton v-else class="w-full" />
     <div class="text-sm font-medium text-gray-500 dark:text-gray-300">
-      Not registered? <RouterLink to="/register" class="text-blue-700 hover:underline dark:text-blue-500">Create account</RouterLink>
+      Not registered? <RouterLink to="/register" class="text-emerald-700 hover:underline dark:text-emerald-500">Create account</RouterLink>
     </div>
   </form>
 </template>

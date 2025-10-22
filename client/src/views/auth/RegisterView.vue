@@ -78,7 +78,7 @@ onMounted(() => {
     <PrimaryButton v-if="!isLoading" type="submit" class="w-full">Create account</PrimaryButton>
     <LoadingButton class="w-full" v-else />
     <div class="text-sm font-medium text-gray-500 dark:text-gray-300">
-      Already registered? <RouterLink to="/login" class="text-blue-700 hover:underline dark:text-blue-500">Sign in</RouterLink>
+      Already registered? <RouterLink to="/login" class="text-emerald-700 hover:underline dark:text-emerald-500">Sign in</RouterLink>
     </div>
   </form>
 </template>

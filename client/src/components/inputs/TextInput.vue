@@ -37,7 +37,7 @@ const handleChange = (e) => {
     :id="name"
     :name="name" 
     :class="class"
-    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:ring-4 focus:outline-none focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" 
+    class="bg-zinc-50 border border-zinc-300 text-zinc-900 text-sm rounded-lg focus:ring-emerald-500 focus:ring-4 focus:outline-none focus:border-emerald-500 block w-full p-2.5 dark:bg-zinc-600 dark:border-zinc-500 dark:placeholder-zinc-400 dark:text-white" 
     :placeholder="placeholder" 
     :required="required"
     @input="handleChange"

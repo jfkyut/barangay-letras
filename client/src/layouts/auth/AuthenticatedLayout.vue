@@ -9,6 +9,14 @@ import { useRoute } from 'vue-router';
 import { useAuthPageTitleStore } from '@/stores/authPageTitle';
 import { computed, onMounted, watch } from 'vue';
 import { useHttpAuth } from '@/http/auth';
+import NavDropdownTrigger from '@/widgets/nav/NavDropdownTrigger.vue';
+import NavDropdownButton from '@/widgets/nav/NavDropdownButton.vue';
+import NavDropdownLink from '@/widgets/nav/NavDropdownLink.vue';
+import LegislationSidebarLinks from './authenticated-layout-partials/LegislationSidebarLinks.vue';
+import FormSidebarLinks from './authenticated-layout-partials/FormSidebarLinks.vue';
+import LegislativeSidebarLinks from './authenticated-layout-partials/LegislativeSidebarLinks.vue';
+import CommunicationSidebarLinks from './authenticated-layout-partials/CommunicationSidebarLinks.vue';
+import KatarunganSidebarLinks from './authenticated-layout-partials/KatarunganSidebarLinks.vue';
 
 const appName = import.meta.env.VITE_APP_NAME;
 
@@ -43,10 +51,10 @@ watch(currentRouteTitle, (currentRouteTitle) => {
 </script>
 
 <template>
-  <div class="relative">
+  <div class="relative text-sm">
     <div
-      :class="isShow ? 'md:ml-64' : 'md:ml-0'"
-      class="bg-white dark:bg-gray-800 pt-4 p-2 fixed top-0 right-0 left-0 flex justify-between items-center border-b dark:border-gray-700 shadow transition-transform z-10">
+      :class="isShow ? 'md:ml-[300px]' : 'md:ml-0'"
+      class="bg-white dark:bg-zinc-800 pt-4 p-2 fixed top-0 right-0 left-0 flex justify-between items-center border-b dark:border-zinc-700 shadow transition-transform z-10">
       <ExtraButton @click="toggleSidebar">
         <span class="sr-only">Open sidebar</span>
         <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -54,7 +62,7 @@ watch(currentRouteTitle, (currentRouteTitle) => {
         </svg>
       </ExtraButton>
 
-      <div class="dark:text-gray-300 absolute left-1/2 -translate-x-1/2">
+      <div class="dark:text-zinc-300 absolute left-1/2 -translate-x-1/2">
         {{ routeTitle  }}
       </div>
 
@@ -64,14 +72,14 @@ watch(currentRouteTitle, (currentRouteTitle) => {
     <aside 
       id="default-sidebar" 
       :class="isShow ? 'translate-x-0' : '-translate-x-full'"
-      class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform bg-gray-800 border-r border-gray-700" aria-label="Sidebar">
+      class="fixed top-0 left-0 z-40 w-[300px] h-screen transition-transform bg-zinc-800 border-r border-zinc-700" aria-label="Sidebar">
       <div class="px-3 py-4 pt-5">
         <h2 class="text-white font-black uppercase md:text-center">
           <RouterLink to="/">
             {{ appName }}
           </RouterLink>
         </h2>
-        <button @click="setHide()" type="button" class="md:hidden text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 absolute top-2.5 end-2.5 flex items-center justify-center dark:hover:bg-gray-600 dark:hover:text-white" >
+        <button @click="setHide()" type="button" class="md:hidden text-zinc-400 bg-transparent hover:bg-zinc-200 hover:text-zinc-900 rounded-lg text-sm w-8 h-8 absolute top-2.5 end-2.5 flex items-center justify-center dark:hover:bg-zinc-600 dark:hover:text-white" >
           <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
           </svg>
@@ -81,12 +89,33 @@ watch(currentRouteTitle, (currentRouteTitle) => {
       <div class="h-full px-3 py-4 overflow-y-auto">
         <ul class="space-y-2 font-medium">
           <li>
-            <RouterLink to="/dashboard" @click="closeOnSmallScreen" active-class="bg-gray-700" class="flex items-center p-2 rounded-lg text-white hover:bg-gray-700 group">
-              <span class="w-5 h-5 transition duration-75 text-gray-400 group-hover:text-white">
+            <RouterLink to="/dashboard" @click="closeOnSmallScreen" active-class="bg-zinc-700" class="flex items-center p-2 rounded-lg text-white hover:bg-zinc-700 group">
+              <span class="w-5 h-5 transition duration-75 text-zinc-400 group-hover:text-white">
                 <i class="ri-home-fill"></i>
               </span>
               <span class="ms-2">Dashboard</span>
             </RouterLink>
+          </li>
+          <li>
+            <FormSidebarLinks />
+          </li>
+          <li>
+            <LegislationSidebarLinks />
+          </li>
+          <li>
+            <LegislativeSidebarLinks />
+          </li>
+          <li>
+            <CommunicationSidebarLinks />
+          </li>
+          <li>
+            <KatarunganSidebarLinks />
+          </li>
+          <li>
+            <NavDropdownLink to="/vawc">
+              <i class="ri-speak-line"></i>
+              <span class="ms-2">VAWC</span>
+            </NavDropdownLink>
           </li>
           <li>
             <ThemeToggler />
@@ -96,13 +125,13 @@ watch(currentRouteTitle, (currentRouteTitle) => {
     </aside>
     
     <div
-      :class="isShow ? 'md:ml-64' : 'md:ml-0'"
-      class="p-4 bg-gray-50 dark:bg-gray-900 min-h-screen dark:text-gray-400 transition-transform pt-20">
+      :class="isShow ? 'md:ml-[300px]' : 'md:ml-0'"
+      class="p-4 bg-zinc-50 dark:bg-zinc-900 min-h-screen dark:text-zinc-400 transition-transform pt-20">
 
       <div
         :class="isShow ? 'opacity-100' : 'opacity-0 invisible'" 
         @click.self="setHide()"
-        class="backdrop-sepia-0 bg-gray-400/70 duration-200 dark:bg-gray-950/70 md:hidden z-30 fixed left-0 right-0 top-0 bottom-0"></div>
+        class="backdrop-sepia-0 bg-zinc-400/70 duration-200 dark:bg-zinc-950/70 md:hidden z-30 fixed left-0 right-0 top-0 bottom-0"></div>
       <slot/>
     </div>
   </div>

@@ -58,7 +58,7 @@ onMounted(() => {
       class="w-full">Send password reset link</PrimaryButton>
     <LoadingButton v-else class="w-full" />
     <div class="text-sm font-medium text-gray-500 dark:text-gray-300">
-      <RouterLink to="/login" class="text-blue-700 hover:underline dark:text-blue-500">Back to login page</RouterLink>
+      <RouterLink to="/login" class="text-emerald-700 hover:underline dark:text-emerald-500">Back to login page</RouterLink>
     </div>
   </form>
 </template>
