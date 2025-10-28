@@ -1,29 +1,29 @@
 <script setup>
 
-import Container from '@/components/Container.vue';
+import { Button } from 'primevue';
 import Modal from '@/components/Modal.vue';
-import { ref, watch } from 'vue';
-import { Button, Select, InputText, Textarea } from 'primevue';
-import { useCommon } from '@/composables/common';
+import { ref, toRefs, watch } from 'vue';
+import Container from '@/components/Container.vue';
+import SessionForm from './SessionForm.vue';
 import { useHttpSession } from '@/http/session';
-import { useHttpCouncil } from '@/http/council';
 import { useToast } from 'vue-toastification';
-import { storeToRefs } from 'pinia';
-import { useCouncilStore } from '@/stores/council';
 import { useSessionStore } from '@/stores/session';
 import { useRoute } from 'vue-router';
-import SessionForm from './SessionForm.vue';
+import { useCommon } from '@/composables/common';
 
-const toast = useToast();
+const props = defineProps({ session: Object });
 
-const route = useRoute();
-
-const { fetchSessions } = useSessionStore();
+const { session } = toRefs(props);
 
 const isShowModal = ref(false);
-const submitButtonRef = ref(null);
+const submitButtonRef = ref(false);
+const toast = useToast();
+const route = useRoute();
 
-const { createSessionRequest } = useHttpSession();
+const { convertToOrdinal } = useCommon();
+
+const { fetchSessions } = useSessionStore();
+const { updateSessionRequest } = useHttpSession();
 
 const form = ref({
     council_id: null,
@@ -32,10 +32,24 @@ const form = ref({
     session_no: null,
     date: null,
     remarks: null,
-})
+});
 
-const createSession = async () => {
-    if (await createSessionRequest(form.value)) {
+watch(isShowModal, (isShowModal) => {
+    if (isShowModal) {
+        form.value.council_id = session.value.council_id;
+        form.value.year = session.value.year;
+        form.value.type_id = session.value.type_id;
+        form.value.session_no = session.value.session_no;
+        form.value.date = session.value.date;
+        form.value.remarks = session.value.remarks;
+    }
+}, { immediate: true });
+
+const submit = async (session) => {
+
+    console.log(form.value);
+
+    if (await updateSessionRequest(session?.id, form.value)) {
         isShowModal.value = false;
         form.value = {
             council_id: null,
@@ -48,17 +62,14 @@ const createSession = async () => {
 
         await fetchSessions(route.params);
 
-        toast.success('Session created successfully.');
+        toast.success('Session updated successfully.');
     }
 }
 
 </script>
 
 <template>
-    <Button severity="contrast" @click="isShowModal = true">
-        <i class="ri-add-line"></i>
-        <span class="ms-2">New</span>
-    </Button>
+    <Button @click="isShowModal = true" icon="ri-pencil-line" class="p-button-text p-button-sm" />
 
     <Modal
         :show="isShowModal"
@@ -67,9 +78,12 @@ const createSession = async () => {
         <Container>
             <template #header>
                 <div class="flex justify-between">
-                    <h3 class="text-xl font-semibold text-zinc-900 dark:text-white">
-                        Create New Session
-                    </h3>
+                    
+                    <header class="flex items-center">
+                        <h3 class="text-xl font-semibold text-zinc-900 dark:text-white uppercase">
+                            Edit {{ convertToOrdinal(session?.session_no) }} {{ session?.type?.name }} Session
+                        </h3>
+                    </header>
                     <div class="flex items-center gap-2">
                         <Button 
                             severity="secondary" 
@@ -87,8 +101,8 @@ const createSession = async () => {
                 </div>
             </template>
             <template #body>
-                <form @submit.prevent="createSession">
-                    <SessionForm :form="form" />
+                <form @submit.prevent="submit(session)">
+                    <SessionForm :form="form" form-type="edit" />
                     <button type="submit" ref="submitButtonRef" class="sr-only">
                         submit
                     </button>

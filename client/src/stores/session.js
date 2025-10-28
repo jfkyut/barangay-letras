@@ -2,10 +2,11 @@ import { defineStore } from "pinia";
 import { ref, watch } from "vue";
 import { useHttpSession } from "@/http/session";
 
-const { getSessionsRequest } = useHttpSession();
+const { getSessionsRequest, getSessionTypesRequest } = useHttpSession();
 
 export const useSessionStore = defineStore('session', () => {
     const sessions = ref([]);
+    const sessionTypes = ref([]);
 
     const getSessions = async (params) => {
         if (sessions.value.length === 0) {
@@ -28,10 +29,23 @@ export const useSessionStore = defineStore('session', () => {
         }
     }
 
+    // session types
+    const getSessionTypes = async () => {
+        if (sessionTypes.value.length === 0) {
+            const { session_types } = await getSessionTypesRequest();
+
+            sessionTypes.value = session_types;
+        }
+
+        return sessionTypes.value;
+    }
+
     return {
         sessions,
+        sessionTypes,
         getSessions,
         fetchSessions,
-        deleteSession
+        deleteSession,
+        getSessionTypes
     }
 })

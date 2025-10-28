@@ -19,6 +19,22 @@ export const useHttpSession = () => {
     });
   } 
 
+  const updateSessionRequest = (session_id, form) => {
+    return sendApiRequest( async () => {
+      await axios.put(`/api/session/${session_id}`, form);
+
+      return true;
+    })
+  }
+
+  const deleteSessionRequest = (session_id) => {
+    return sendApiRequest( async () => {
+      await axios.delete(`/api/session/${session_id}`);
+
+      return true;
+    })
+  }
+
   const getSessionTypesRequest = () => {
     return sendApiRequest( async () => {
       const { data } = await axios.get('/api/session-types');
@@ -30,6 +46,9 @@ export const useHttpSession = () => {
   return {
     getSessionsRequest,
     createSessionRequest,
-    getSessionTypesRequest
+    updateSessionRequest,
+    deleteSessionRequest,
+
+    getSessionTypesRequest,
   }
 }

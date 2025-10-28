@@ -16,6 +16,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
     // sessions
     Route::get('/sessions', [\App\Http\Controllers\OfficeSessionController::class, 'index'])->name('session.index');
     Route::post('/sessions', [\App\Http\Controllers\OfficeSessionController::class, 'store'])->name('session.store');
+    Route::put('/session/{session}', [\App\Http\Controllers\OfficeSessionController::class, 'update'])->name('session.update');
+    Route::delete('/session/{session}', [\App\Http\Controllers\OfficeSessionController::class, 'destroy'])->name('session.destroy');
 
     // session types
     Route::get('/session-types', [\App\Http\Controllers\OfficeSessionTypeController::class, 'index'])->name('session-type.index');

@@ -1,8 +1,5 @@
 <script setup>
 import { useRouter } from 'vue-router';
-import { useHttpSession } from '@/http/session';
-import { useSessionStore } from '@/stores/session';
-import { storeToRefs } from 'pinia';
 
 const props = defineProps({ 
     links: Array, 

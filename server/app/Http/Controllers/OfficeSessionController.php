@@ -61,4 +61,30 @@ class OfficeSessionController extends Controller
             'session' => $session->load(['council', 'type']),
         ], 201);
     }
+
+    public function update(StoreOfficeSessionRequest $request, OfficeSession $session)
+    {
+        $session->update([
+            'council_id' => $request->validated('council_id'),
+            'type_id' => $request->validated('type_id'),
+            'year' => $request->validated('year'),
+            'session_no' => $request->validated('session_no'),
+            'date' => $request->validated('date'),
+            'remarks' => $request->validated('remarks'),
+        ]);
+
+        return response()->json([
+            'message' => 'Office session updated successfully.',
+            'session' => $session->load(['council', 'type']),
+        ]);
+    }
+
+    public function destroy(OfficeSession $session)
+    {
+        $session->delete();
+
+        return response()->json([
+            'message' => 'Office session deleted successfully.',
+        ]);
+    }
 }

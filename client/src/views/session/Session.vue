@@ -12,6 +12,9 @@ import { useSessionFilterParamStore } from '@/stores/filters/sessionFilterParam'
 import SessionFilterDropdown from './session_partials/SessionFilterDropdown.vue';
 import { useCommon } from '@/composables/common';
 import Paginator from '@/components/Paginator.vue';
+import FileAttachment from '@/components/FileAttachment.vue';
+import EditSessionModal from './session_partials/EditSessionModal.vue';
+import DeleteSessionModal from './session_partials/DeleteSessionModal.vue';
 
 const { getSessionsRequest } = useHttpSession();
 
@@ -105,7 +108,13 @@ onMounted(() => {
                 <Column header-class="sticky top-0" class="w-[200px] md:w-[400px]" sortable field="type.name" header="Type"></Column>
                 <Column header-class="sticky top-0" class="w-[200px] md:w-[400px]" sortable field="date" header="Date"></Column>
                 <Column header-class="sticky top-0" class="w-[200px] md:w-[400px]" sortable field="remarks" header="Remarks"></Column>
-                <Column header-class="sticky top-0" class="w-[200px] md:w-[400px]" header="Agenda"></Column>
+                <Column header-class="sticky top-0" class="w-[200px] md:w-[400px]" header="Agenda">
+                    <template #body="slotProps">
+                        <FileAttachment 
+                            
+                        />
+                    </template>
+                </Column>
                 <Column header-class="sticky top-0" class="w-[200px] md:w-[400px]" header="Minutes"></Column>
                 <Column header-class="sticky top-0" class="w-[200px] md:w-[400px]" header="Journal"></Column>
                 <Column header-class="sticky top-0" class="w-[200px] md:w-[400px]" header="Audio"></Column>
@@ -113,8 +122,8 @@ onMounted(() => {
                 <Column header-class="sticky top-0" class="w-[200px] md:w-[400px]" header="Attendance"></Column>
                 <Column header-class="sticky top-0" class="w-[200px] md:w-[400px]" :frozen="true" align-frozen="right" header="Action">
                     <template #body="slotProps">
-                        <Button icon="ri-pencil-line" class="p-button-text p-button-sm" />
-                        <Button icon="ri-delete-bin-6-line" class="p-button-text p-button-sm p-button-danger" />
+                        <EditSessionModal :session="slotProps.data" />
+                        <DeleteSessionModal :session="slotProps.data" />
                     </template>
                 </Column>
 
@@ -126,7 +135,7 @@ onMounted(() => {
 
             </DataTable>
 
-            <div class="mt-2">
+            <div class="mt-2" v-if="sessions.links?.length > 3">
                 <Paginator 
                     :links="sessions.links" 
                     :params="params"
