@@ -9,6 +9,7 @@ import KatarunganDropdown from './nav-bar-partials/KatarunganDropdown.vue';
 import { Button } from 'primevue';
 import { useRoute } from 'vue-router';
 import { useRouter } from 'vue-router';
+import IssuanceDropdown from './nav-bar-partials/IssuanceDropdown.vue';
 
 const route = useRoute();
 
@@ -34,6 +35,7 @@ const open = ref(false)
         <div class="hidden sm:flex sm:items-center sm:space-x-6">
           <router-link to="/" class="text-zinc-600 hover:text-zinc-800 dark:text-zinc-300 dark:hover:text-white">Home</router-link>
           <router-link to="#about" class="text-zinc-600 hover:text-zinc-800 dark:text-zinc-300 dark:hover:text-white">About</router-link>
+          <IssuanceDropdown />
           <FormDropdown />
           
           <LegislationDropdown />
