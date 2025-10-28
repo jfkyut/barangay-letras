@@ -39,7 +39,7 @@ const route = useRoute();
   <ul 
     id="dropdown-example" 
     v-show="isLinksShow"
-    class="p-2 space-y-2 duration-200 max-h-[30vh] overflow-y-auto bg-zinc-800 z-[1000] border-l border-zinc-600 ml-6">
+    class="p-2 space-y-2 duration-200 max-h-[50vh] overflow-y-auto bg-zinc-800 z-[1000] border-l border-zinc-600 ml-6">
     <slot/>
   </ul>
 </template>

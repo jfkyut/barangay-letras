@@ -75,7 +75,7 @@ export const useCommon = () => {
         // handle special cases: 11, 12, 13
         const lastTwo = strNum.slice(-2);
         if (lastTwo === "11" || lastTwo === "12" || lastTwo === "13") {
-            return `${num}th Council`;
+            return `${num}th`;
         }
 
         // check last digit

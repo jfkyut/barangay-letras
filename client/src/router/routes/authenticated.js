@@ -100,6 +100,8 @@ const authenticatedRoutes = [
     },
     beforeEnter: [authenticated, verified]
   },
+
+  // vawc
   {
     path: '/vawc',
     name: 'vawc.index',
@@ -107,6 +109,18 @@ const authenticatedRoutes = [
     meta: {
       layout: AuthenticatedLayout,
       title: 'VAWC'
+    },
+    beforeEnter: [authenticated, verified]
+  },
+
+  // sessions
+  {
+    path: '/session',
+    name: 'legislative.session.index',
+    component: () => import('@/views/session/Session.vue'),
+    meta: {
+      layout: AuthenticatedLayout,
+      title: 'Sessions'
     },
     beforeEnter: [authenticated, verified]
   },

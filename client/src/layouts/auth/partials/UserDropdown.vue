@@ -43,8 +43,8 @@ watch(isDropdownShow, (dropdownState) => {
 
 const handleClickOutside = (e) => {
   (
-    !instance.refs.dropdownRef.$el.contains(e.target) || 
-    !instance.refs.dropdownTriggerRef.$el.contains(e.target)
+    !instance.refs.dropdownRef.$el?.contains(e.target) || 
+    !instance.refs.dropdownTriggerRef.$el?.contains(e.target)
   ) && hideDropdown()
 }
 

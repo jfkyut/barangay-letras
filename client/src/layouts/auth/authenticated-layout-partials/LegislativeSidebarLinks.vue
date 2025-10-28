@@ -23,9 +23,9 @@ watch(isShowDropdown, (isShowDropdown) => {
         @toggle-dropdown="isShowDropdown = !isShowDropdown"
         :is-links-show="isShowDropdown"
     >
-        <NavDropdownButton>
+        <NavDropdownLink :to="{ name: 'legislative.session.index' }">
             Sessions
-        </NavDropdownButton>
+        </NavDropdownLink>
         <NavDropdownButton>
             Committees
         </NavDropdownButton>

@@ -86,7 +86,7 @@ watch(currentRouteTitle, (currentRouteTitle) => {
           <span class="sr-only">Close menu</span>
         </button>
       </div>
-      <div class="h-full px-3 py-4 overflow-y-auto">
+      <div class="h-[90%] px-3 py-4 overflow-y-auto">
         <ul class="space-y-2 font-medium">
           <li>
             <RouterLink to="/dashboard" @click="closeOnSmallScreen" active-class="bg-zinc-700" class="flex items-center p-2 rounded-lg text-white hover:bg-zinc-700 group">
@@ -131,7 +131,8 @@ watch(currentRouteTitle, (currentRouteTitle) => {
       <div
         :class="isShow ? 'opacity-100' : 'opacity-0 invisible'" 
         @click.self="setHide()"
-        class="backdrop-sepia-0 bg-zinc-400/70 duration-200 dark:bg-zinc-950/70 md:hidden z-30 fixed left-0 right-0 top-0 bottom-0"></div>
+        class="backdrop-sepia-0 bg-zinc-400/70 duration-200 dark:bg-zinc-950/70 md:hidden z-30 fixed left-0 right-0 top-0 bottom-0"
+      ></div>
       <slot/>
     </div>
   </div>

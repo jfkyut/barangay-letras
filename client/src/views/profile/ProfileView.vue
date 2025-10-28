@@ -5,7 +5,6 @@ import { storeToRefs } from 'pinia';
 import EditProfile from '@/views/profile/partials/EditProfile.vue';
 import EditPassword from './partials/EditPassword.vue';
 import DeleteProfile from './partials/DeleteProfile.vue';
-import { DataTable } from 'primevue';
 
   const { user } = storeToRefs(useProfileStore());
 </script>
@@ -62,10 +61,6 @@ import { DataTable } from 'primevue';
           </div>
         </div>
       </section>
-
-      <DataTable>
-        
-      </DataTable>
 
     </div>
   </div>

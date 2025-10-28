@@ -61,11 +61,11 @@ const emit = defineEmits(['onConfirm', 'onCancel']);
         </div>
         <!-- Modal footer -->
         <div class="flex items-center gap-3 p-4 md:p-5 border-t border-zinc-200 rounded-b dark:border-zinc-600">
-          <button v-if="isForm && !isLoading" data-modal-hide="default-modal" type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+          <button v-if="isForm && !isLoading" data-modal-hide="default-modal" type="submit" class="text-white bg-emerald-700 hover:bg-emerald-800 focus:ring-4 focus:outline-none focus:ring-emerald-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-emerald-600 dark:hover:bg-emerald-700 dark:focus:ring-emerald-800">
             {{ confirmButtonText }}
           </button>
           <LoadingButton v-else />
-          <button @click="emit('onCancel')" data-modal-hide="default-modal" type="button" class="py-2.5 px-5 text-sm font-medium text-zinc-900 focus:outline-none bg-white rounded-lg border border-zinc-200 hover:bg-zinc-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-zinc-100 dark:focus:ring-zinc-700 dark:bg-zinc-800 dark:text-zinc-400 dark:border-zinc-600 dark:hover:text-white dark:hover:bg-zinc-700">
+          <button @click="emit('onCancel')" data-modal-hide="default-modal" type="button" class="py-2.5 px-5 text-sm font-medium text-zinc-900 focus:outline-none bg-white rounded-lg border border-zinc-200 hover:bg-zinc-100 hover:text-emerald-700 focus:z-10 focus:ring-4 focus:ring-zinc-100 dark:focus:ring-zinc-700 dark:bg-zinc-800 dark:text-zinc-400 dark:border-zinc-600 dark:hover:text-white dark:hover:bg-zinc-700">
             {{ cancelButtonText }}
           </button>
         </div>
