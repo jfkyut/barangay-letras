@@ -1,5 +1,4 @@
 <script setup>
-
 defineProps({
   class: String,
   disabled: {
@@ -13,7 +12,6 @@ defineProps({
 })
 
 const emit = defineEmits(['click', 'mouseover', 'mouseout'])
-
 </script>
 
 <template>
@@ -25,7 +23,7 @@ const emit = defineEmits(['click', 'mouseover', 'mouseout'])
       @mouseover="emit('mouseover')"
       @mouseout="emit('mouseout')"
       :class="class"
-      class="p-2 w-full items-center transition duration-75 rounded-lg group text-white hover:bg-zinc-700 text-start font-normal truncate">
+      class="p-2 w-full items-center transition duration-75 rounded-lg group text-white hover:bg-emerald-800/50 text-start font-normal truncate disabled:opacity-50 disabled:cursor-not-allowed">
       <slot />
     </button>
   </li>

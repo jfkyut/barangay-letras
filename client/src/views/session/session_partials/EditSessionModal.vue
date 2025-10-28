@@ -69,7 +69,7 @@ const submit = async (session) => {
 </script>
 
 <template>
-    <Button @click="isShowModal = true" icon="ri-pencil-line" class="p-button-text p-button-sm" />
+    <Button @click="isShowModal = true" icon="ri-pencil-line" variant="text" />
 
     <Modal
         :show="isShowModal"

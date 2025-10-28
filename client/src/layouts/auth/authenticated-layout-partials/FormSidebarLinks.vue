@@ -8,7 +8,7 @@ import { ref, watch } from 'vue';
 import CertificationLinks from './form-sidebar-links-partials/CertificationLinks.vue';
 
 const isShowDropdown = ref(
-    sessionStorage.getItem('form-sidebar-links-dropdown') 
+    JSON.parse(sessionStorage.getItem('form-sidebar-links-dropdown')) 
     || false
 );
 

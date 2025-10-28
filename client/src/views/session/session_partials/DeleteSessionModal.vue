@@ -44,7 +44,8 @@ const submit = async (session) => {
     <Button 
         @click="isShowModal = true" 
         icon="ri-delete-bin-6-line" 
-        class="p-button-text p-button-sm p-button-danger dark:text-red-400" 
+        variant="text"
+        severity="danger"
     />
 
     <Modal :show="isShowModal" @close="isShowModal = false">

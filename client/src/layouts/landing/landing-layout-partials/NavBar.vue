@@ -12,6 +12,8 @@ import { useRouter } from 'vue-router';
 
 const route = useRoute();
 
+const appName = import.meta.env.VITE_APP_NAME;
+
 const open = ref(false)
 
 </script>
@@ -20,8 +22,12 @@ const open = ref(false)
   <nav class="bg-white shadow dark:bg-zinc-800 dark:shadow-sm border-b dark:border-zinc-700">
     <div class="lg:max-w-[90%] mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between h-16">
-        <div class="flex items-center">
-          <a class="text-xl font-semibold text-emerald-600 dark:text-emerald-400" href="#">LETRAS B</a>
+        <div class="flex flex-col justify-center">
+          <h1>
+            <a class="text-xl font-semibold text-emerald-600 dark:text-emerald-400" href="#">
+              {{ appName }}
+            </a>
+          </h1>
         </div>
 
         <!-- nav and dropdown -->

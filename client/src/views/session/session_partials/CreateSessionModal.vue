@@ -55,7 +55,7 @@ const createSession = async () => {
 </script>
 
 <template>
-    <Button severity="contrast" @click="isShowModal = true">
+    <Button @click="isShowModal = true">
         <i class="ri-add-line"></i>
         <span class="ms-2">New</span>
     </Button>
