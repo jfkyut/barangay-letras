@@ -25,7 +25,9 @@ const { params } = storeToRefs(useSessionFilterParamStore());
 
 const isTableLoading = ref(false);
 
-const { convertToOrdinal } = useCommon();
+
+
+const { convertToOrdinal, redirectToNewTab } = useCommon();
 
 const handleFilter = async (filterParams) => {
     
@@ -110,16 +112,82 @@ onMounted(() => {
                 <Column header-class="sticky top-0" class="w-[200px] md:w-[400px]" sortable field="remarks" header="Remarks"></Column>
                 <Column header-class="sticky top-0" class="w-[200px] md:w-[400px]" header="Agenda">
                     <template #body="slotProps">
-                        <FileAttachment 
-                            
-                        />
+                        <div>
+                            <ul class="space-y-2">
+                                <li v-for="(file, index) in slotProps.data?.attachments?.filter(a => a?.type?.name === 'agenda')" :key="index" class="whitespace-pre-wrap ">
+                                    <FileAttachment 
+                                        :file="file"
+                                    />
+                                </li>
+                            </ul>
+                        </div>
                     </template>
                 </Column>
-                <Column header-class="sticky top-0" class="w-[200px] md:w-[400px]" header="Minutes"></Column>
-                <Column header-class="sticky top-0" class="w-[200px] md:w-[400px]" header="Journal"></Column>
-                <Column header-class="sticky top-0" class="w-[200px] md:w-[400px]" header="Audio"></Column>
-                <Column header-class="sticky top-0" class="w-[200px] md:w-[400px]" header="Photos"></Column>
-                <Column header-class="sticky top-0" class="w-[200px] md:w-[400px]" header="Attendance"></Column>
+                <Column header-class="sticky top-0" class="w-[200px] md:w-[400px]" header="Minutes">
+                    <template #body="slotProps">
+                        <div>
+                            <ul class="space-y-2">
+                                <li v-for="(file, index) in slotProps.data?.attachments?.filter(a => a?.type?.name === 'minutes')" :key="index" class="whitespace-pre-wrap ">
+                                    <FileAttachment 
+                                        :file="file"
+                                    />
+                                </li>
+                            </ul>
+                        </div>
+                    </template>
+                </Column>
+                <Column header-class="sticky top-0" class="w-[200px] md:w-[400px]" header="Journal">
+                    <template #body="slotProps">
+                        <div>
+                            <ul class="space-y-2">
+                                <li v-for="(file, index) in slotProps.data?.attachments?.filter(a => a?.type?.name === 'journal')" :key="index" class="whitespace-pre-wrap ">
+                                    <FileAttachment 
+                                        :file="file"
+                                    />
+                                </li>
+                            </ul>
+                        </div>
+                    </template>
+                </Column>
+                <Column header-class="sticky top-0" class="w-[200px] md:w-[400px]" header="Audio">
+                    <template #body="slotProps">
+                        <div>
+                            <ul class="space-y-2">
+                                <li v-for="(file, index) in slotProps.data?.attachments?.filter(a => a?.type?.name === 'audio')" :key="index" class="whitespace-pre-wrap ">
+                                    <FileAttachment 
+                                        :file="file"
+                                    />
+                                </li>
+                            </ul>
+                        </div>
+                    </template>
+                </Column>
+                <Column header-class="sticky top-0" class="w-[200px] md:w-[400px]" header="Photos">
+                    <template #body="slotProps">
+                        <div>
+                            <ul class="space-y-2">
+                                <li v-for="(file, index) in slotProps.data?.attachments?.filter(a => a?.type?.name === 'photo')" :key="index" class="whitespace-pre-wrap ">
+                                    <FileAttachment 
+                                        :file="file"
+                                    />
+                                </li>
+                            </ul>
+                        </div>
+                    </template>
+                </Column>
+                <Column header-class="sticky top-0" class="w-[200px] md:w-[400px]" header="Attendance">
+                    <template #body="slotProps">
+                        <div>
+                            <ul class="space-y-2">
+                                <li v-for="(file, index) in slotProps.data?.attachments?.filter(a => a?.type?.name === 'attendance')" :key="index" class="whitespace-pre-wrap ">
+                                    <FileAttachment 
+                                        :file="file"
+                                    />
+                                </li>
+                            </ul>
+                        </div>
+                    </template>
+                </Column>
                 <Column header-class="sticky top-0" class="w-[200px] md:w-[400px]" :frozen="true" align-frozen="right" header="Action">
                     <template #body="slotProps">
                         <EditSessionModal :session="slotProps.data" />

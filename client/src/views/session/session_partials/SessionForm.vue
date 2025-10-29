@@ -23,6 +23,10 @@ const { getSessionTypes } = useSessionStore();
 
 const { years } = useCommon();
 
+const setFiles = (e, cb) => {
+    cb(e.target.files);
+}
+
 onMounted(() => {
     (async () => {
         await getCouncils();
@@ -95,6 +99,7 @@ onMounted(() => {
                     type="date"
                     class="w-full"
                     placeholder="Select date"
+                    required
                 />
             </div>
             <div class="space-y-2 w-full">
@@ -105,6 +110,66 @@ onMounted(() => {
                     placeholder="Add remarks"
                     rows="4"
                     auto-resize
+                />
+            </div>
+        </div>
+        <div class="flex gap-2">
+            <div class="space-y-2 w-full">
+                <label for="">Agenda</label>
+                <InputText 
+                    type="file"
+                    class="w-full"
+                    multiple
+                    @change="(e) => setFiles(e, (files) => form.attachment.agenda = files)"
+                />
+            </div>
+            <div class="space-y-2 w-full">
+                <label for="">Minutes</label>
+                <InputText 
+                    type="file"
+                    class="w-full"
+                    multiple
+                    @change="(e) => setFiles(e, (files) => form.attachment.minutes = files)"
+                />
+            </div>
+        </div>
+        <div class="flex gap-2">
+            <div class="space-y-2 w-full">
+                <label for="">Journal</label>
+                <InputText 
+                    type="file"
+                    class="w-full"
+                    multiple
+                    @change="(e) => setFiles(e, (files) => form.attachment.journal = files)"
+                />
+            </div>
+            <div class="space-y-2 w-full">
+                <label for="">Audio</label>
+                <InputText 
+                    type="file"
+                    class="w-full"
+                    multiple
+                    @change="(e) => setFiles(e, (files) => form.attachment.audio = files)"
+                />
+            </div>
+        </div>
+        <div class="flex gap-2">
+            <div class="space-y-2 w-full">
+                <label for="">Photos</label>
+                <InputText 
+                    type="file"
+                    class="w-full"
+                    multiple
+                    @change="(e) => setFiles(e, (files) => form.attachment.photo = files)"
+                />
+            </div>
+            <div class="space-y-2 w-full">
+                <label for="">Attendance</label>
+                <InputText 
+                    type="file"
+                    class="w-full"
+                    multiple
+                    @change="(e) => setFiles(e, (files) => form.attachment.attendance = files)"
                 />
             </div>
         </div>

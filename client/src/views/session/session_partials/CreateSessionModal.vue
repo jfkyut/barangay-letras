@@ -32,10 +32,36 @@ const form = ref({
     session_no: null,
     date: null,
     remarks: null,
+    attachment: {
+        agenda: [],
+        minutes: [],
+        journal: [],
+        audio: [],
+        photo: [],
+        attendance: []
+    }
 })
 
 const createSession = async () => {
-    if (await createSessionRequest(form.value)) {
+    const formData = new FormData();
+    
+    // Append basic form fields
+    Object.keys(form.value).forEach(key => {
+        if (key !== 'attachment') {
+            formData.append(key, form.value[key]);
+        }
+    });
+
+    // Append files with attachment prefix
+    Object.entries(form.value.attachment).forEach(([key, files]) => {
+        if (files && files.length > 0) {
+            Array.from(files).forEach(file => {
+                formData.append(`attachment[${key}][]`, file);
+            });
+        }
+    });
+
+    if (await createSessionRequest(formData)) {
         isShowModal.value = false;
         form.value = {
             council_id: null,
@@ -44,10 +70,17 @@ const createSession = async () => {
             session_no: null,
             date: null,
             remarks: null,
+            attachment: {
+                agenda: [],
+                minutes: [],
+                journal: [],
+                audio: [],
+                photo: [],
+                attendance: []
+            }
         }
 
         await fetchSessions(route.params);
-
         toast.success('Session created successfully.');
     }
 }

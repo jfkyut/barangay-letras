@@ -32,6 +32,14 @@ const form = ref({
     session_no: null,
     date: null,
     remarks: null,
+    attachment: {
+        agenda: [],
+        minutes: [],
+        journal: [],
+        audio: [],
+        photo: [],
+        attendance: []
+    }
 });
 
 watch(isShowModal, (isShowModal) => {
@@ -47,9 +55,27 @@ watch(isShowModal, (isShowModal) => {
 
 const submit = async (session) => {
 
-    console.log(form.value);
+    const formData = new FormData();
 
-    if (await updateSessionRequest(session?.id, form.value)) {
+    // console.log(form.value);
+    
+    // Append basic form fields
+    Object.keys(form.value).forEach(key => {
+        if (key !== 'attachment') {
+            formData.append(key, form.value[key]);
+        }
+    });
+
+    // Append files with attachment prefix
+    Object.entries(form.value.attachment).forEach(([key, files]) => {
+        if (files && files.length > 0) {
+            Array.from(files).forEach(file => {
+                formData.append(`attachment[${key}][]`, file);
+            });
+        }
+    });
+
+    if (await updateSessionRequest(session?.id, formData)) {
         isShowModal.value = false;
         form.value = {
             council_id: null,
@@ -58,6 +84,14 @@ const submit = async (session) => {
             session_no: null,
             date: null,
             remarks: null,
+            attachment: {
+                agenda: [],
+                minutes: [],
+                journal: [],
+                audio: [],
+                photo: [],
+                attendance: []
+            }
         }
 
         await fetchSessions(route.params);
@@ -95,7 +129,7 @@ const submit = async (session) => {
                             severity="contrast"
                             @click="submitButtonRef?.click()"
                         >
-                            Create
+                            Update
                         </Button>
                     </div>
                 </div>
