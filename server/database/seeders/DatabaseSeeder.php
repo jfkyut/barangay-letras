@@ -25,6 +25,8 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             CouncilSeeder::class,
+            OfficeSessionSeeder::class,
+            AttachmentTypeSeeder::class
         ]);
     }
 }

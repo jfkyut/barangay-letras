@@ -25,4 +25,9 @@ class OfficeSession extends Model
     {
         return $this->belongsTo(OfficeSessionType::class, 'type_id');
     }
+
+    public function attachments()
+    {
+        return $this->hasMany(OfficeSessionAttachment::class, 'session_id');
+    }
 }

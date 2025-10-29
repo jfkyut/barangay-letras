@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AttachmentType;
 use Illuminate\Http\Request;
 use App\Models\OfficeSession\OfficeSession;
 use App\Http\Requests\OfficeSession\StoreOfficeSessionRequest;
+use Illuminate\Support\Facades\Storage;
 
 class OfficeSessionController extends Controller
 {
@@ -39,7 +41,13 @@ class OfficeSessionController extends Controller
         });
 
         return response()->json([
-            'sessions' => $officeSessionQuery->with(['council', 'type'])
+            'sessions' => $officeSessionQuery->with([
+                                                'council', 
+                                                'type'
+                                            ])
+                                            ->with('attachments', function ($attachments) {
+                                                $attachments->with('type');
+                                            })
                                             ->latest()
                                             ->paginate(100),
         ]);
@@ -55,6 +63,78 @@ class OfficeSessionController extends Controller
             'date' => $request->validated('date'),
             'remarks' => $request->validated('remarks'),
         ]);
+
+        if ($request->hasFile('attachment.agenda')) {
+            foreach ($request->file('attachment.agenda') as $file) {
+                $path = $file->store("/office-sessions/" . $session->id . "/agenda", 'public');
+            
+                $session->attachments()->create([
+                    'file_path' => $path,
+                    'file_name' => $file->getClientOriginalName(),
+                    'type_id' => AttachmentType::where('name', 'agenda')->first()->id
+                ]);
+            }
+        }
+
+        if ($request->hasFile('attachment.minutes')) {
+            foreach ($request->file('attachment.minutes') as $file) {
+                $path = $file->store("/office-sessions/" . $session->id . "/minutes", 'public');
+            
+                $session->attachments()->create([
+                    'file_path' => $path,
+                    'file_name' => $file->getClientOriginalName(),
+                    'type_id' => AttachmentType::where('name', 'minutes')->first()->id
+                ]);
+            }
+        }
+
+        if ($request->hasFile('attachment.journal')) {
+            foreach ($request->file('attachment.journal') as $file) {
+                $path = $file->store("/office-sessions/" . $session->id . "/journal", 'public');
+            
+                $session->attachments()->create([
+                    'file_path' => $path,
+                    'file_name' => $file->getClientOriginalName(),
+                    'type_id' => AttachmentType::where('name', 'journal')->first()->id
+                ]);
+            }
+        }
+
+        if ($request->hasFile('attachment.audio')) {
+            foreach ($request->file('attachment.audio') as $file) {
+                $path = $file->store("/office-sessions/" . $session->id . "/audio", 'public');
+            
+                $session->attachments()->create([
+                    'file_path' => $path,
+                    'file_name' => $file->getClientOriginalName(),
+                    'type_id' => AttachmentType::where('name', 'audio')->first()->id
+                ]);
+            }
+        }
+
+        if ($request->hasFile('attachment.photo')) {
+            foreach ($request->file('attachment.photo') as $file) {
+                $path = $file->store("/office-sessions/" . $session->id . "/photo", 'public');
+            
+                $session->attachments()->create([
+                    'file_path' => $path,
+                    'file_name' => $file->getClientOriginalName(),
+                    'type_id' => AttachmentType::where('name', 'photo')->first()->id
+                ]);
+            }
+        }
+
+        if ($request->hasFile('attachment.attendance')) {
+            foreach ($request->file('attachment.attendance') as $file) {
+                $path = $file->store("/office-sessions/" . $session->id . "/attendance", 'public');
+            
+                $session->attachments()->create([
+                    'file_path' => $path,
+                    'file_name' => $file->getClientOriginalName(),
+                    'type_id' => AttachmentType::where('name', 'attendance')->first()->id
+                ]);
+            }
+        }
 
         return response()->json([
             'message' => 'Office session created successfully.',
@@ -72,6 +152,78 @@ class OfficeSessionController extends Controller
             'date' => $request->validated('date'),
             'remarks' => $request->validated('remarks'),
         ]);
+
+        if ($request->hasFile('attachment.agenda')) {
+            foreach ($request->file('attachment.agenda') as $file) {
+                $path = $file->store("/office-sessions/" . $session->id . "/agenda", 'public');
+            
+                $session->attachments()->create([
+                    'file_path' => $path,
+                    'file_name' => $file->getClientOriginalName(),
+                    'type_id' => AttachmentType::where('name', 'agenda')->first()->id
+                ]);
+            }
+        }
+
+        if ($request->hasFile('attachment.minutes')) {
+            foreach ($request->file('attachment.minutes') as $file) {
+                $path = $file->store("/office-sessions/" . $session->id . "/minutes", 'public');
+            
+                $session->attachments()->create([
+                    'file_path' => $path,
+                    'file_name' => $file->getClientOriginalName(),
+                    'type_id' => AttachmentType::where('name', 'minutes')->first()->id
+                ]);
+            }
+        }
+
+        if ($request->hasFile('attachment.journal')) {
+            foreach ($request->file('attachment.journal') as $file) {
+                $path = $file->store("/office-sessions/" . $session->id . "/journal", 'public');
+            
+                $session->attachments()->create([
+                    'file_path' => $path,
+                    'file_name' => $file->getClientOriginalName(),
+                    'type_id' => AttachmentType::where('name', 'journal')->first()->id
+                ]);
+            }
+        }
+
+        if ($request->hasFile('attachment.audio')) {
+            foreach ($request->file('attachment.audio') as $file) {
+                $path = $file->store("/office-sessions/" . $session->id . "/audio", 'public');
+            
+                $session->attachments()->create([
+                    'file_path' => $path,
+                    'file_name' => $file->getClientOriginalName(),
+                    'type_id' => AttachmentType::where('name', 'audio')->first()->id
+                ]);
+            }
+        }
+
+        if ($request->hasFile('attachment.photo')) {
+            foreach ($request->file('attachment.photo') as $file) {
+                $path = $file->store("/office-sessions/" . $session->id . "/photo", 'public');
+            
+                $session->attachments()->create([
+                    'file_path' => $path,
+                    'file_name' => $file->getClientOriginalName(),
+                    'type_id' => AttachmentType::where('name', 'photo')->first()->id
+                ]);
+            }
+        }
+
+        if ($request->hasFile('attachment.attendance')) {
+            foreach ($request->file('attachment.attendance') as $file) {
+                $path = $file->store("/office-sessions/" . $session->id . "/attendance", 'public');
+            
+                $session->attachments()->create([
+                    'file_path' => $path,
+                    'file_name' => $file->getClientOriginalName(),
+                    'type_id' => AttachmentType::where('name', 'attendance')->first()->id
+                ]);
+            }
+        }
 
         return response()->json([
             'message' => 'Office session updated successfully.',

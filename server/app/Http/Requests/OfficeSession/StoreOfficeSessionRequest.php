@@ -28,6 +28,12 @@ class StoreOfficeSessionRequest extends FormRequest
             'session_no' => ['required', 'integer'],
             'date' => ['required', 'date'],
             'remarks' => ['nullable', 'string'],
+            'attachment.agenda' => 'nullable',
+            'attachment.minutes' => 'nullable',
+            'attachment.journal' => 'nullable',
+            'attachment.audio' => 'nullable',
+            'attachment.photo' => 'nullable',
+            'attachment.attenance' => 'nullable',
         ];
     }
 }
