@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\IncomingCommunication\IncomingCommunication;
 use App\Http\Requests\Incoming\StoreIncomingCommunicationRequest;
+use App\Http\Requests\Incoming\UpdateIncomingCommunicationRequest;
 
 class IncomingCommunnicationController extends Controller
 {
@@ -33,7 +34,10 @@ class IncomingCommunnicationController extends Controller
         });
 
         return response()->json([
-            'incoming_communications' => $incomingQuery->orderByDesc('year')
+            'incoming_communications' => $incomingQuery->with([
+                                                        'attachments'
+                                                    ])
+                                                    ->orderByDesc('year')
                                                     ->orderByDesc('reference_no')
                                                     ->paginate(100)
         ]);
@@ -43,15 +47,44 @@ class IncomingCommunnicationController extends Controller
     {
        $incomingCommunication = IncomingCommunication::create($request->validated());
 
+        if ($request->hasFile('attachments')) {
+            foreach ($request->file('attachments') as $file) {
+                $filePath = $file->store('incoming_communications/' . $incomingCommunication->id, 'public');
+
+                $incomingCommunication->attachments()->create([
+                    'file_path' => $filePath,
+                    'file_name' => $file->getClientOriginalName(),
+                    'type_id' => null, // Set type_id if applicable
+                ]);
+            }
+        }
+
        return response()->json([
             'message' => 'Incoming communication created successfully.',
             'incoming_communication' => $incomingCommunication
        ]);
     }
 
-    public function update(Request $request, IncomingCommunication $incomingCommunication)
+    public function update(UpdateIncomingCommunicationRequest $request, IncomingCommunication $incomingCommunication)
     {
-        return $request;
+        $incomingCommunication->update($request->validated());
+
+        if ($request->hasFile('attachments')) {
+            foreach ($request->file('attachments') as $file) {
+                $filePath = $file->store('incoming_communications/' . $incomingCommunication->id, 'public');
+
+                $incomingCommunication->attachments()->create([
+                    'file_path' => $filePath,
+                    'file_name' => $file->getClientOriginalName(),
+                    'type_id' => null, // Set type_id if applicable
+                ]);
+            }
+        }
+
+        return response()->json([
+            'message' => 'Incoming communication updated successfully.',
+            'incoming_communication' => $incomingCommunication
+        ]);
     }
 
     public function destroy(IncomingCommunication $incomingCommunication)

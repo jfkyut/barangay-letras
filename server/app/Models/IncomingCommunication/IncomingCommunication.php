@@ -19,4 +19,9 @@ class IncomingCommunication extends Model
         'required_action',
         'remarks',
     ];
+
+    public function attachments()
+    {
+        return $this->hasMany(IncomingCommunicationAttachment::class, 'incoming_id');
+    }
 }
