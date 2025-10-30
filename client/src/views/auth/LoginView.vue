@@ -7,8 +7,10 @@ import PrimaryButton from '@/components/buttons/PrimaryButton.vue';
 import LoadingButton from '@/components/buttons/LoadingButton.vue';
 import { useHttpAuth } from '@/http/auth';
 import { useRouter } from 'vue-router';
+import { useProfileStore } from '@/stores/profile';
 
 const { loginRequest } = useHttpAuth();
+const profileStore = useProfileStore();
 
 const router = useRouter();
 const instance = getCurrentInstance();
@@ -25,7 +27,10 @@ const form = ref({
 const login = async () => {
   isLoading.value = true;  
 
-  (await loginRequest(form.value)) && router.push('/home')
+  if (await loginRequest(form.value)) {
+    await profileStore.getProfile();
+    router.push('/home');
+  }
   
   isLoading.value = false;
 }

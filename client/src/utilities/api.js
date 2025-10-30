@@ -17,7 +17,7 @@ export const useApiUtilities = () => {
         )
       )
 
-      return false;
+      return error.response ? error.response : null;
     }
   }
 

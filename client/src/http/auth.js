@@ -63,6 +63,6 @@ export const useHttpAuth = () => {
     logoutRequest,
     newPasswordRequest,
     resetPasswordRequest,
-    emailVerificationRequest
+    emailVerificationRequest,
   }
 }

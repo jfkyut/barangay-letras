@@ -35,28 +35,23 @@ const showDropdown = () => {
 
 const hideDropdown = () => isDropdownShow.value = false;
 
-watch(isDropdownShow, (dropdownState) => {
-  (dropdownState) 
-    ? document.addEventListener('click', handleClickOutside)
-    : document.removeEventListener('click', handleClickOutside)
-})
-
-const handleClickOutside = (e) => {
-  (
-    !instance.refs.dropdownRef.$el?.contains(e.target) || 
-    !instance.refs.dropdownTriggerRef.$el?.contains(e.target)
-  ) && hideDropdown()
-}
-
 </script>
 
 <template>
   <div class="relative">
-    <Button severity="secondary" @click.stop="showDropdown">
+    <Button severity="secondary"
+      @mouseover="isDropdownShow = true"
+      @mouseout="isDropdownShow = false"
+    >
       {{ user?.name }}
     </Button>
 
-    <DropdownMenu :show="isDropdownShow" ref="dropdownRef">
+    <DropdownMenu 
+      :show="isDropdownShow" 
+      ref="dropdownRef"
+      @mouseover="isDropdownShow = true"
+      @mouseout="isDropdownShow = false"
+    >
       <DropdownLink to="/account">
         <i class="fa fa-user mr-2"></i>
         <span>Account</span>

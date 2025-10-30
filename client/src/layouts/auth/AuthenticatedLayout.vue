@@ -7,7 +7,6 @@ import ThemeToggler from '@/layouts/auth/partials/ThemeToggler.vue';
 import { useRoute } from 'vue-router';
 import { useAuthPageTitleStore } from '@/stores/authPageTitle';
 import { computed, onMounted, watch } from 'vue';
-import { useHttpAuth } from '@/http/auth';
 import NavDropdownTrigger from '@/widgets/nav/NavDropdownTrigger.vue';
 import NavDropdownButton from '@/widgets/nav/NavDropdownButton.vue';
 import NavDropdownLink from '@/widgets/nav/NavDropdownLink.vue';
@@ -35,6 +34,7 @@ const closeOnSmallScreen = () => {
 
 onMounted(() => {
   routeTitle.value = currentRouteTitle.value;
+  
 })
 
 watch(currentRouteTitle, (currentRouteTitle) => {
@@ -71,7 +71,7 @@ watch(currentRouteTitle, (currentRouteTitle) => {
             {{ appName }}
           </RouterLink>
           <p class="text-xs uppercase font-normal text-emerald-300/90 hover:text-emerald-200 transition-colors">
-            Barangay Records and Analysis Information Network System
+            Barangay Records Analysis and Information Network System
           </p>
         </h2>
         <button @click="setHide()" type="button" class="md:hidden text-emerald-400 bg-transparent hover:bg-emerald-800 hover:text-emerald-100 rounded-lg text-sm w-8 h-8 absolute top-2.5 end-2.5 flex items-center justify-center transition-all duration-200">

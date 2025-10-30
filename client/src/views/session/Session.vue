@@ -18,41 +18,38 @@ import DeleteSessionModal from './session_partials/DeleteSessionModal.vue';
 
 const { getSessionsRequest } = useHttpSession();
 
-const { sessions } = storeToRefs(useSessionStore());
+const { sessions, isDataLoading } = storeToRefs(useSessionStore());
 const { fetchSessions } = useSessionStore();
 
 const { params } = storeToRefs(useSessionFilterParamStore());
-
-const isTableLoading = ref(false);
-
 
 
 const { convertToOrdinal, redirectToNewTab } = useCommon();
 
 const handleFilter = async (filterParams) => {
     
-    isTableLoading.value = true;
+    isDataLoading.value = true;
 
     await fetchSessions(filterParams);
 
-    isTableLoading.value = false;
+    isDataLoading.value = false;
 }
 
 const handlePageChange = async (pageParams) => {
-    isTableLoading.value = true;
+    isDataLoading.value = true;
 
     await fetchSessions(pageParams);
 
-    isTableLoading.value = false;
+    isDataLoading.value = false;
 }
 
 onMounted(() => {
     (async () => {
-        isTableLoading.value = true;
+        isDataLoading.value = true;
 
         const { data } = await getSessionsRequest(params.value);
 
-        isTableLoading.value = false;
+        isDataLoading.value = false;
 
         sessions.value = data.sessions;
     })();
@@ -98,7 +95,7 @@ onMounted(() => {
                 tableStyle="min-width: 50rem"
                 scrollable
                 scrollHeight="70vh"
-                :loading="isTableLoading"
+                :loading="isDataLoading"
             >
                 <Column header-class="sticky top-0" class="w-[200px] md:w-[400px]" sortable header="Council">
                     <template #body="slotProps">
@@ -109,7 +106,6 @@ onMounted(() => {
                 <Column header-class="sticky top-0" class="w-[200px] md:w-[400px]" sortable field="session_no" header="Session No."></Column>
                 <Column header-class="sticky top-0" class="w-[200px] md:w-[400px]" sortable field="type.name" header="Type"></Column>
                 <Column header-class="sticky top-0" class="w-[200px] md:w-[400px]" sortable field="date" header="Date"></Column>
-                <Column header-class="sticky top-0" class="w-[200px] md:w-[400px]" sortable field="remarks" header="Remarks"></Column>
                 <Column header-class="sticky top-0" class="w-[200px] md:w-[400px]" header="Agenda">
                     <template #body="slotProps">
                         <div>
@@ -188,10 +184,14 @@ onMounted(() => {
                         </div>
                     </template>
                 </Column>
+                <Column header-class="sticky top-0" class="w-[200px] md:w-[400px]" sortable field="remarks" header="Remarks"></Column>
+
                 <Column header-class="sticky top-0" class="w-[200px] md:w-[400px]" :frozen="true" align-frozen="right" header="Action">
                     <template #body="slotProps">
-                        <EditSessionModal :session="slotProps.data" />
-                        <DeleteSessionModal :session="slotProps.data" />
+                        <div class="flex flex-col gap-2">
+                            <EditSessionModal :session="slotProps.data" />
+                            <DeleteSessionModal :session="slotProps.data" />
+                        </div>
                     </template>
                 </Column>
 

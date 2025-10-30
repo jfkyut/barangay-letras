@@ -14,9 +14,7 @@ export const useProfileStore = defineStore('profile', () => {
     if (!user.value) {
       const { data } = await getProfileRequest();
 
-      if (data) {
-        user.value = data;
-      }
+      user.value = data?.user;
     }
   }
 

@@ -27,7 +27,9 @@ const isLoading = ref(false);
 const submit = async (session) => {
     isLoading.value = true;
 
-    if (await deleteSessionRequest(session?.id)) {
+    const { data } = await deleteSessionRequest(session?.id);
+
+    if (!data.errors) {
         isShowModal.value = false;
 
         await fetchSessions(route.params);
@@ -43,10 +45,12 @@ const submit = async (session) => {
 <template>
     <Button 
         @click="isShowModal = true" 
-        icon="ri-delete-bin-6-line" 
-        variant="text"
         severity="danger"
-    />
+        variant="outlined"
+    >
+        <i class="ri-delete-bin-line"></i>
+        <span>Delete</span>
+    </Button>
 
     <Modal :show="isShowModal" @close="isShowModal = false">
         <Container class="dark:bg-gray-800">

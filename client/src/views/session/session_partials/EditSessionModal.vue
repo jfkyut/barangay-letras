@@ -10,6 +10,7 @@ import { useToast } from 'vue-toastification';
 import { useSessionStore } from '@/stores/session';
 import { useRoute } from 'vue-router';
 import { useCommon } from '@/composables/common';
+import { storeToRefs } from 'pinia';
 
 const props = defineProps({ session: Object });
 
@@ -20,8 +21,11 @@ const submitButtonRef = ref(false);
 const toast = useToast();
 const route = useRoute();
 
+const errors = ref([]);
+
 const { convertToOrdinal } = useCommon();
 
+const { isDataLoading } = storeToRefs(useSessionStore());
 const { fetchSessions } = useSessionStore();
 const { updateSessionRequest } = useHttpSession();
 
@@ -55,6 +59,8 @@ watch(isShowModal, (isShowModal) => {
 
 const submit = async (session) => {
 
+    isDataLoading.value = true;
+
     const formData = new FormData();
 
     // console.log(form.value);
@@ -75,7 +81,9 @@ const submit = async (session) => {
         }
     });
 
-    if (await updateSessionRequest(session?.id, formData)) {
+    const { data } = await updateSessionRequest(session?.id, formData);
+
+    if (!data.errors) {
         isShowModal.value = false;
         form.value = {
             council_id: null,
@@ -97,13 +105,20 @@ const submit = async (session) => {
         await fetchSessions(route.params);
 
         toast.success('Session updated successfully.');
+    } else {
+        errors.value = data.errors;
     }
+
+    isDataLoading.value = false;
 }
 
 </script>
 
 <template>
-    <Button @click="isShowModal = true" icon="ri-pencil-line" variant="text" />
+    <Button @click="isShowModal = true" variant="outlined">
+        <i class="ri-edit-line"></i>
+        <span>Edit</span>
+    </Button>
 
     <Modal
         :show="isShowModal"
@@ -126,6 +141,7 @@ const submit = async (session) => {
                             Cancel
                         </Button>
                         <Button 
+                            :loading="isDataLoading"
                             severity="contrast"
                             @click="submitButtonRef?.click()"
                         >
@@ -136,7 +152,7 @@ const submit = async (session) => {
             </template>
             <template #body>
                 <form @submit.prevent="submit(session)">
-                    <SessionForm :form="form" form-type="edit" />
+                    <SessionForm :form="form" form-type="edit" :errors="errors" />
                     <button type="submit" ref="submitButtonRef" class="sr-only">
                         submit
                     </button>

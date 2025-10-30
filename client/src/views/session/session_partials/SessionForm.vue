@@ -1,17 +1,22 @@
 <script setup>
 
-import { Select, InputText, Textarea } from 'primevue';
+import { Select, InputText, Textarea, InputNumber } from 'primevue';
 import { storeToRefs } from 'pinia';
 import { useCouncilStore } from '@/stores/council';
 import { useSessionStore } from '@/stores/session';
 import { useCommon } from '@/composables/common';
 import { onMounted, ref } from 'vue';
+import InputError from '@/components/InputError.vue';
 
 defineProps({
     form: Object,
     formType: {
         type: String,
-        default: 'create'
+        default: () => 'create'
+    },
+    errors: {
+        type: Array,
+        default: () => {}
     }
 })
 
@@ -50,6 +55,9 @@ onMounted(() => {
                     filter
                     placeholder="Select council"
                 />
+                <div class="mt-2" v-if="errors.council_id?.length > 0">
+                    <InputError :message="errors.council_id[0]" />
+                </div>
             </div>
             <div class="space-y-2 w-full">
                 <label for="">Year</label>
@@ -66,6 +74,9 @@ onMounted(() => {
                         {{ year }}
                     </option>
                 </select>
+                <div class="mt-2" v-if="errors?.year?.length > 0">
+                    <InputError :message="errors.year[0]" />
+                </div>
             </div>
         </div>
         <div class="flex gap-2">
@@ -80,6 +91,9 @@ onMounted(() => {
                     filter
                     placeholder="Select type"
                 />
+                <div class="mt-2" v-if="errors?.type_id?.length > 0">
+                    <InputError :message="errors.type_id[0]" />
+                </div>
             </div>
             <div class="space-y-2 w-full">
                 <label for="">Session No.</label>
@@ -89,6 +103,9 @@ onMounted(() => {
                     class="w-full"
                     placeholder="session no."
                 />
+                <div class="mt-2" v-if="errors?.session_no?.length > 0">
+                    <InputError :message="errors.session_no[0]" />
+                </div>
             </div>
         </div>
         <div class="flex gap-2">
@@ -101,6 +118,9 @@ onMounted(() => {
                     placeholder="Select date"
                     required
                 />
+                <div class="mt-2" v-if="errors?.date?.length > 0">
+                    <InputError :message="errors.date[0]" />
+                </div>
             </div>
             <div class="space-y-2 w-full">
                 <label for="">Remarks</label>
@@ -111,6 +131,9 @@ onMounted(() => {
                     rows="4"
                     auto-resize
                 />
+                <div class="mt-2" v-if="errors?.remarks?.length > 0">
+                    <InputError :message="errors.remarks[0]" />
+                </div>
             </div>
         </div>
         <div class="flex gap-2">

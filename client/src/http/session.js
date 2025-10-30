@@ -14,14 +14,12 @@ export const useHttpSession = () => {
   const createSessionRequest = (form) => {
 
     return sendApiRequest( async () => {
-        await axios.post('/api/sessions', form, {
+        return await axios.post('/api/sessions', form, {
           headers: {
             'Content-Type': 'multipart/form-data',
             'Accept': 'application/json',
           }
         });
-
-        return true;
     });
   } 
 
@@ -30,22 +28,18 @@ export const useHttpSession = () => {
     form.append('_method', 'PUT');
 
     return sendApiRequest( async () => {
-      await axios.post(`/api/session/${session_id}/update`, form, {
+      return await axios.post(`/api/session/${session_id}/update`, form, {
         headers: {
           'Content-Type': 'multipart/form-data',
           'Accept': 'application/json',
         }
       });
-
-      return true;
     })
   }
 
   const deleteSessionRequest = (session_id) => {
     return sendApiRequest( async () => {
-      await axios.delete(`/api/session/${session_id}/destroy`);
-
-      return true;
+      return await axios.delete(`/api/session/${session_id}/destroy`);
     })
   }
 

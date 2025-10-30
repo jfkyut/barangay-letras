@@ -18,10 +18,13 @@ const toast = useToast();
 
 const route = useRoute();
 
+const { isDataLoading } = storeToRefs(useSessionStore());
 const { fetchSessions } = useSessionStore();
 
 const isShowModal = ref(false);
 const submitButtonRef = ref(null);
+
+const errors = ref([]);
 
 const { createSessionRequest } = useHttpSession();
 
@@ -43,6 +46,9 @@ const form = ref({
 })
 
 const createSession = async () => {
+
+    isDataLoading.value = true;
+
     const formData = new FormData();
     
     // Append basic form fields
@@ -61,7 +67,9 @@ const createSession = async () => {
         }
     });
 
-    if (await createSessionRequest(formData)) {
+    const { data } = await createSessionRequest(formData);
+
+    if (!data.errors) {
         isShowModal.value = false;
         form.value = {
             council_id: null,
@@ -82,7 +90,11 @@ const createSession = async () => {
 
         await fetchSessions(route.params);
         toast.success('Session created successfully.');
+    } else {
+        errors.value = data.errors;
     }
+
+    isDataLoading.value = false;
 }
 
 </script>
@@ -99,7 +111,7 @@ const createSession = async () => {
     >
         <Container>
             <template #header>
-                <div class="flex justify-between">
+                <div class="flex justify-between items-center">
                     <h3 class="text-xl font-semibold text-zinc-900 dark:text-white">
                         Create New Session
                     </h3>
@@ -111,6 +123,7 @@ const createSession = async () => {
                             Cancel
                         </Button>
                         <Button 
+                            :loading="isDataLoading"
                             severity="contrast"
                             @click="submitButtonRef?.click()"
                         >
@@ -121,7 +134,7 @@ const createSession = async () => {
             </template>
             <template #body>
                 <form @submit.prevent="createSession">
-                    <SessionForm :form="form" />
+                    <SessionForm :form="form" :errors="errors" />
                     <button type="submit" ref="submitButtonRef" class="sr-only">
                         submit
                     </button>
